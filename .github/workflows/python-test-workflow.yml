@@ -10,7 +10,7 @@ jobs:
       - name: Setup
         uses: actions/setup-python@v5.1.0
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -18,7 +18,14 @@ jobs:
       - name: Lint
         run: |
           flake8 . --count --show-source --statistics --exclude=./test_*.py
+      - name: List test files
+        run: |
+          ls ./test_*.py
       - name: Test
         run: |
-          pytest test_*.py
-
+          pytest test_*.py --junitxml='report.xml
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: ./report.xml
