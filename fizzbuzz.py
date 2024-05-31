@@ -14,4 +14,3 @@ def fizzbuzz(num):
         return 'Buzz'
 
     return num
-
